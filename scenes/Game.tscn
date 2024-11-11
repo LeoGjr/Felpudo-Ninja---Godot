@@ -1,0 +1,218 @@
+[gd_scene load_steps=9 format=1]
+
+[ext_resource path="res://scripts/Game.gd" type="Script" id=1]
+[ext_resource path="res://assets/bgfruitninja.jpg" type="Texture" id=2]
+[ext_resource path="res://scripts/Input.gd" type="Script" id=3]
+[ext_resource path="res://assets/hud_vidas.png" type="Texture" id=4]
+[ext_resource path="res://assets/font150.fnt" type="BitmapFont" id=5]
+[ext_resource path="res://assets/bomb100.png" type="Texture" id=6]
+[ext_resource path="res://scripts/GameOver.gd" type="Script" id=7]
+
+[sub_resource type="Animation" id=1]
+
+resource/name = "gameOver"
+length = 0.7
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:visibility/opacity")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.7 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[node name="Game" type="Node2D"]
+
+script/script = ExtResource( 1 )
+
+[node name="BackGround" type="Sprite" parent="."]
+
+transform/scale = Vector2( 0.8, 0.6 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Fruits" type="Node2D" parent="."]
+
+[node name="Generator" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = false
+autostart = true
+
+[node name="InputProc" type="Node2D" parent="."]
+
+script/script = ExtResource( 3 )
+
+[node name="Inter" type="Timer" parent="InputProc"]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = false
+autostart = false
+
+[node name="Limit" type="Timer" parent="InputProc"]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = false
+autostart = false
+
+[node name="Control" type="Control" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+
+[node name="TextureFrame" type="TextureFrame" parent="Control"]
+
+rect/scale = Vector2( 0.4, 0.4 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 291.0
+margin/bottom = 316.0
+texture = ExtResource( 4 )
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Control"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 133.0
+margin/top = 16.0
+margin/right = 212.0
+margin/bottom = 146.0
+custom_fonts/font = ExtResource( 5 )
+text = "0"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Bomb1" type="TextureFrame" parent="Control"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 1165.0
+margin/top = 15.0
+margin/right = 1265.0
+margin/bottom = 115.0
+texture = ExtResource( 6 )
+stretch_mode = 0
+
+[node name="Bomb2" type="TextureFrame" parent="Control"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 1077.0
+margin/top = 15.0
+margin/right = 1177.0
+margin/bottom = 115.0
+texture = ExtResource( 6 )
+stretch_mode = 0
+
+[node name="Bomb3" type="TextureFrame" parent="Control"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 989.0
+margin/top = 15.0
+margin/right = 1089.0
+margin/bottom = 115.0
+texture = ExtResource( 6 )
+stretch_mode = 0
+
+[node name="GameOverScreen" type="Control" parent="."]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+script/script = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="GameOverScreen"]
+
+visibility/opacity = 0.0
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 277.0
+margin/top = 239.0
+margin/right = 1003.0
+margin/bottom = 369.0
+custom_fonts/font = ExtResource( 5 )
+text = "Game Over"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label 2" type="Label" parent="GameOverScreen"]
+
+visibility/visible = false
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 23.0
+margin/top = 484.0
+margin/right = 1256.0
+margin/bottom = 614.0
+custom_fonts/font = ExtResource( 5 )
+text = "Jogar Novamente"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameOverScreen"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/gameOver = SubResource( 1 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[node name="Timer" type="Timer" parent="GameOverScreen"]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = false
+autostart = false
+
+[connection signal="timeout" from="Generator" to="." method="_on_Generator_timeout"]
+
+[connection signal="timeout" from="InputProc/Inter" to="InputProc" method="_on_Inter_timeout"]
+
+[connection signal="timeout" from="InputProc/Limit" to="InputProc" method="_on_Limit_timeout"]
+
+[connection signal="timeout" from="GameOverScreen/Timer" to="GameOverScreen" method="_on_Timer_timeout"]
+
+
